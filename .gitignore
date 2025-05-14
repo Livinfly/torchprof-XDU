@@ -1,0 +1,6 @@
+report/*
+results/*
+# data/*
+log/*
+__pycache__
+*_trace.json

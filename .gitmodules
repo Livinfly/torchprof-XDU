@@ -1,0 +1,3 @@
+[submodule "torchprof_xdu"]
+	path = torchprof_xdu
+	url = https://github.com/Livinfly/torchprof_xdu
