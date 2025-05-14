@@ -1,88 +1,11 @@
 import torch
 import torch.nn as nn
 import torchvision.models as models
-from torch.profiler import profile, record_function, ProfilerActivity
-# from ...torchprof_xdu.torchprof_xdu_profile_detailed import ProfileDetailed
+from torch.profiler import ProfilerActivity
+# from ..torchprof_xdu.torchprof_xdu_profile_detailed import ProfileDetailed
 import argparse
 import copy
-
-import sys
-import os
-
-current_file_path = os.path.abspath(__file__)
-task_dir = os.path.dirname(current_file_path)
-profile_dir = os.path.dirname(task_dir)
-project_root = os.path.dirname(profile_dir)
-
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
-
-from torchprof_xdu import ProfileDetailed
-
-def profile_model(model, model_name, input_tensor, device, 
-                  profiler_activities, row_limit=10, record_shapes=False, 
-                  profile_memory=True, with_stack=True, with_flops=True, sorted=False,
-                  trace_export=False):
-    model.to(device)
-    input_tensor = input_tensor.to(device)
-    model.eval()
-
-    print(f"\n--- Profiling {model_name} on {device} ---")
-
-    print("Warm-up runs (2 iterations)...")
-    for _ in range(2):
-        _ = model(input_tensor)
-
-    print("Starting profiled run...")
-    with ProfileDetailed(
-        model,
-        enabled=True,
-        use_cuda=(device.type == "cuda"),
-        profile_memory=profile_memory
-    ) as prof:
-        with torch.no_grad():
-            # 为了测试的稳定性，多跑几次？如30次？
-            for _ in range(1):
-                _ = model(input_tensor)
-
-    print(f"\n--- {model_name} Profiler Results ---")
-    print(prof.display(top_k=-1))
-
-    if sorted:
-        print(f"\n--- {model_name} Profiler Results (Sorted by CPU total time) ---")
-        print(prof.display(sort_by='CPU total', top_k=row_limit))
-
-        if device.type == 'cuda':
-            print(f"\n--- {model_name} Profiler Results (Sorted by CUDA total time) ---")
-            print(prof.display(sort_by="CUDA total", top_k=row_limit))
-
-        print(f"\n--- {model_name} Profiler Results (Sorted by CPU Memory Usage) ---")
-        print(prof.display(sort_by="CPU Mem", top_k=row_limit))
-
-        if device.type == 'cuda':
-            print(f"\n--- {model_name} Profiler Results (Sorted by CUDA Memory Usage) ---")
-            print(prof.display(sort_by="CUDA Mem", top_k=row_limit))
-    
-    # # (可选) 导出 trace 文件，用于 Chrome Tracing (chrome://tracing)
-    # # 目前还是临时通过 torch.profiler 本来就存在的方法导出，重新 proile 一次
-    # # 目前 torchprof_xdu 版本不支持直接导出 trace 文件
-    # # 为了压低内存使用，trace_export 在主函数运行
-    # if trace_export:
-    #     trace_file = f"{model_name.replace(' ', '_').lower()}_trace.json"
-    #     for _ in range(2):
-    #         _ = model(input_tensor)
-
-    #     with profile(
-    #         activities=profiler_activities,
-    #         record_shapes=record_shapes,
-    #         profile_memory=profile_memory,
-    #         with_stack=with_stack,
-    #         with_flops=with_flops,
-    #     ) as prof:
-    #         with torch.no_grad():
-    #             _ = model(input_tensor)
-    #     prof.export_chrome_trace(trace_file)
-    #     print(f"\nTrace file exported to: {trace_file}")
+from utils import profile_model, trace_export_func
 
 
 def create_optimized_alexnet(original_alexnet):
@@ -202,21 +125,8 @@ if __name__ == "__main__":
         
         if args.trace_export:
             trace_file = "original_alexnet_trace.json"
-            alexnet.to(device)
-            sample_input = sample_input.to(device)
-            for _ in range(2):
-                _ = alexnet(sample_input)
-            with profile(
-                activities=profiler_activities,
-                record_shapes=args.record_shapes,
-                profile_memory=True,
-                with_stack=True,
-                with_flops=True,
-            ) as prof:
-                with torch.no_grad():
-                    _ = alexnet(sample_input)
-            prof.export_chrome_trace(trace_file)
-            print(f"\nTrace file exported to: {trace_file}")
+            trace_export_func(trace_file, alexnet, sample_input, device, profiler_activities, args.record_shapes)
+        
     elif args.model == "opt":
         print("\nRunning Experiment: Optimized AlexNet Profiling (Task 3 - Optimization Part)")
         
@@ -228,20 +138,7 @@ if __name__ == "__main__":
                       profiler_activities, args.row_limit, args.record_shapes,
                       profile_memory=True, with_stack=True, with_flops=True, sorted=args.sorted,
                       trace_export=True)  # 是否导出 trace 文件
+        
         if args.trace_export:
             trace_file = "optimized_alexnet_trace.json"
-            optimized_alexnet.to(device)
-            sample_input = sample_input.to(device)
-            for _ in range(2):
-                _ = optimized_alexnet(sample_input)
-            with profile(
-                activities=profiler_activities,
-                record_shapes=args.record_shapes,
-                profile_memory=True,
-                with_stack=True,
-                with_flops=True,
-            ) as prof:
-                with torch.no_grad():
-                    _ = optimized_alexnet(sample_input)
-            prof.export_chrome_trace(trace_file)
-            print(f"\nTrace file exported to: {trace_file}")
+            trace_export_func(trace_file, optimized_alexnet, sample_input, device, profiler_activities, args.record_shapes)

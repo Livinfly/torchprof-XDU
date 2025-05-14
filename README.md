@@ -11,26 +11,55 @@
 git clone --recursive <url_主仓库>
 ```
 
-## Tasks
+## 📚Tasks
 
-运行后，均保存输出完整 log 至 results 文件夹，文本、图片格式都存一下，为后续报告做准备，按照**任务_设置参数**进行命名，同时存储 `*_trace.json` 文件。
+运行后，均保存输出完整 log 至 results 文件夹，文本、图片格式都存一下，为后续报告做准备。
+
+按照**任务_设置参数**进行命名，默认输入也需标明，同时存储 `*_trace.json` 文件。
 
 ```bash
 # Task1
 ## 由于直接使用 torch.profiler，跳过
 
+
 # Task2 
 ## 使用默认参数即可，可以试着导出 --trace_export
-python '.\profile\task2&3\main.py' --model ori --trace_export
+python '.\profile\task2&3.py' --model ori --trace_export
+
 
 # Task3
 ## 1. 定位性能瓶颈
-python '.\profile\task2&3\main.py' --model ori --sorted --row_limit 10 --trace_export
+python '.\profile\task2&3.py' --model ori --sorted --row_limit 10 --trace_export
+
 ### 除了完整的分析外，还会根据 cpu, gpu 的时间耗费、内存占用分别排序
 ### 目前自己实现的排序有些问题，请更具结果，对照去是哪一层，或者看 chrome trace
-### 摘取需要处理的性能瓶颈，我的版本的 opt 模型以 CPU Mem 最高的层 features_Conv2d_0 为例（综合考虑修改难度等等）
+### 摘取需要处理的性能瓶颈
+### 我的版本的 opt 模型以 CPU Mem 最高的层 features_Conv2d_0 为例（综合考虑修改难度等等）
+
 ## 2. 优化性能，产生新模型，分析新性能
-python '.\profile\task2&3\main.py' --model opt --row_limit 10 --trace_export
+python '.\profile\task2&3.py' --model opt --row_limit 10 --trace_export
+
+
+# Task4
+## 1. 测试 ResNet-18 和 MobileNetV2
+python .\profile\task4.py --model resnet18 --trace_export
+python .\profile\task4.py --model mobilenetv2 --trace_export
+
+## 2. 修改输入形状，若要 trace_export 建议手动修改导出名称 --trace_export
+python .\profile\task4.py --model resnet18 --batch_size 32
+python .\profile\task4.py --model mobilenetv2 --batch_size 32
+
+## 3. 多输入模型分析
+python .\profile\task4.py --model mim --trace_export
+
+## 4. 不同分辨率，若要 trace_export 建议手动修改导出名称 --trace_export
+python .\profile\task4.py --model resnet18 --H 512 --W 512
+python .\profile\task4.py --model mobilenetv2 --H 512 --W 512
+
+
+# Task5
+## 1. 
+
 
 ```
 
