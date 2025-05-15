@@ -7,14 +7,14 @@ from utils import MultiInputNet, profile_model, trace_export_func
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="PyTorch AlexNet Profiling (Tasks 2 & 3)")
+    parser = argparse.ArgumentParser(description="Profiling (Tasks 4)")
     # 哪个模型
     parser.add_argument(
         "--model", 
         type=str, 
         default="resnet18",  
-        choices=["resnet18", "mobilenetv2", "mim"],  # mim 是 multi-input model
-        help="resnet18 or mobilenetv2 or multi-input model"
+        choices=["resnet18", "mobilenet_v2", "mim"],  # mim 是 multi-input model
+        help="resnet18 or mobilenet_v2 or multi-input model"
     )
     # 通用参数
     parser.add_argument(
@@ -37,6 +37,11 @@ if __name__ == "__main__":
         "--trace_export",
         action="store_true",  # 是否导出 trace 文件
         help="Export profiler results to a trace file."
+    )
+    parser.add_argument(
+        "--use_cpu",
+        action="store_true",  # 是否使用 CPU
+        help="Use CPU for profiling."
     )
     # 模型输入参数
     parser.add_argument(
@@ -68,6 +73,8 @@ if __name__ == "__main__":
 
     # 默认 cuda 可用就启用 cuda 的 profiler
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if args.use_cpu: 
+        device = torch.device("cpu")
     print(f"Using device: {device}")
 
     # 用于之前的 profiler 版本，当前torchprof_xdu 版本不需要
@@ -88,20 +95,20 @@ if __name__ == "__main__":
                       trace_export=True)  # 是否导出 trace 文件
         
         if args.trace_export:
-            trace_file = "resnet18_trace.json"
+            trace_file = f"resnet18_{device.type}_trace.json"
             trace_export_func(trace_file, resnet18, sample_input, device, profiler_activities, args.record_shapes)
 
-    elif args.model == "mobilenetv2":
+    elif args.model == "mobilenet_v2":
         print("\nRunning Experiment: MobileNetV2 Profiling")
-        mobilenetv2 = models.mobilenet_v2(weights=None)  # 因为只是测试速度，所以就不加载预训练权重了
-        profile_model(mobilenetv2, "MobileNetV2", sample_input, device, 
+        mobilenet_v2 = models.mobilenet_v2(weights=None)  # 因为只是测试速度，所以就不加载预训练权重了
+        profile_model(mobilenet_v2, "MobileNetV2", sample_input, device, 
                       profiler_activities, args.row_limit, args.record_shapes,
                       profile_memory=True, with_stack=True, with_flops=True, sorted=args.sorted,
                       trace_export=True)
         
         if args.trace_export:
-            trace_file = "mobilenetv2_trace.json"
-            trace_export_func(trace_file, mobilenetv2, sample_input, device, profiler_activities, args.record_shapes)
+            trace_file = f"mobilenet_v2_{device.type}_trace.json"
+            trace_export_func(trace_file, mobilenet_v2, sample_input, device, profiler_activities, args.record_shapes)
         
     elif args.model == "mim":
         print("\nRunning Experiment: Multi-Input Model Profiling")
@@ -128,5 +135,5 @@ if __name__ == "__main__":
                       trace_export=True)
         
         if args.trace_export:
-            trace_file = "mim_model_trace.json"
+            trace_file = f"mim_model_{device.type}_trace.json"
             trace_export_func(trace_file, mim_model, sample_input, device, profiler_activities, args.record_shapes)

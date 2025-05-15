@@ -75,6 +75,11 @@ if __name__ == "__main__":
         action="store_true",  # 是否导出 trace 文件
         help="Export profiler results to a trace file."
     )
+    parser.add_argument(
+        "--use_cpu",
+        action="store_true",  # 是否使用 CPU
+        help="Use CPU for profiling."
+    )
     # 模型输入参数
     parser.add_argument(
         "--batch_size",
@@ -105,6 +110,8 @@ if __name__ == "__main__":
 
     # 默认 cuda 可用就启用 cuda 的 profiler
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if args.use_cpu: 
+        device = torch.device("cpu")
     print(f"Using device: {device}")
 
     # 用于之前的 profiler 版本，当前torchprof_xdu 版本不需要
@@ -124,7 +131,7 @@ if __name__ == "__main__":
                       trace_export=True)  # 是否导出 trace 文件
         
         if args.trace_export:
-            trace_file = "original_alexnet_trace.json"
+            trace_file = f"original_alexnet_{device.type}_trace.json"
             trace_export_func(trace_file, alexnet, sample_input, device, profiler_activities, args.record_shapes)
         
     elif args.model == "opt":
@@ -140,5 +147,5 @@ if __name__ == "__main__":
                       trace_export=True)  # 是否导出 trace 文件
         
         if args.trace_export:
-            trace_file = "optimized_alexnet_trace.json"
+            trace_file = f"optimized_alexnet_{device.type}_trace.json"
             trace_export_func(trace_file, optimized_alexnet, sample_input, device, profiler_activities, args.record_shapes)
