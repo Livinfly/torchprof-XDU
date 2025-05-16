@@ -13,13 +13,15 @@ git clone --recursive <url_主仓库>
 
 ## 📚Tasks
 
-运行后，均保存输出完整 log 至 results 文件夹，文本、图片格式都存一下，为后续报告做准备。
+运行后，均保存输出完整 log 至 results 文件夹，文本、图片（截图）格式都存一下，为后续报告做准备。
 
 按照**任务_设置参数**进行命名，默认输入也需标明，同时存储 `*_trace.json` 文件。
 
 默认有 `cuda` 用 `cuda` 因为要测量 `cpu`，记得测一版 `--use_cpu`，`cuda` 版本的cpu耗时等是 `cuda` 时的部分耗时。
 
 注意标明是 `cpu` 版本结果还是 `cuda` 能具体标明显卡、cpu是更好的，最后转移到 results 中。
+
+trace 解析方式 chrome://tracing/
 
 ```bash
 # Task1
