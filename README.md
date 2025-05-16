@@ -85,6 +85,58 @@ python .\profile_tasks\task5.py --model vit_b_16 --batch_size 1
 ### 就自己人眼看，最后可视化一下，建议 资源分布饼图/条形图，Top-K 耗时层
 ```
 
+## Log 举例
+
+```bash
+(PRML) PS E:\000Download\Github\torchprof-XDU> python '.\profile_tasks\task2&3.py' --model ori --trace_export
+Using device: cpu
+Batch size: 1, Channels: 3, Height: 224, Width: 224
+
+Running Experiment: Original AlexNet Profiling (Task 2)
+
+--- Profiling Original AlexNet on cpu ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- Original AlexNet Profiler Results ---
+Module            | Self CPU total | CPU total | Self CPU Mem | CPU Mem   | FLOPs        | Parameters | Calls
+------------------|----------------|-----------|--------------|-----------|--------------|------------|------
+AlexNet           |                |           |              |           |              |            |
+   ├── features   |                |           |              |           |              |            |
+   │  ├── 0       | 2.497us        | 9.852us   | 756.25 Kb    | 3.69 Mb   | 140.55MFLOPs | 23.30K     | 1
+   │  ├── 1       | 77.400ns       | 133.600ns | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 2       | 1.034us        | 1.889us   | 182.25 Kb    | 729.00 Kb | 0 FLOPs      | 0          | 1
+   │  ├── 3       | 1.775us        | 7.009us   | 546.75 Kb    | 2.67 Mb   | 447.90MFLOPs | 307.39K    | 1
+   │  ├── 4       | 61.000ns       | 104.300ns | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 5       | 493.700ns      | 976.300ns | 126.75 Kb    | 507.00 Kb | 0 FLOPs      | 0          | 1
+   │  ├── 6       | 1.256us        | 4.961us   | 253.50 Kb    | 1.24 Mb   | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 7       | 41.600ns       | 69.500ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 1.510us        | 5.999us   | 169.00 Kb    | 845.00 Kb | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 51.600ns       | 85.000ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 7       | 41.600ns       | 69.500ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 1.510us        | 5.999us   | 169.00 Kb    | 845.00 Kb | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 7       | 41.600ns       | 69.500ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 7       | 41.600ns       | 69.500ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 7       | 41.600ns       | 69.500ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 1.510us        | 5.999us   | 169.00 Kb    | 845.00 Kb | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 51.600ns       | 85.000ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  ├── 10      | 1.216us        | 4.802us   | 169.00 Kb    | 845.00 Kb | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 11      | 34.400ns       | 55.200ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+   │  └── 12      | 417.600ns      | 821.400ns | 36.00 Kb     | 144.00 Kb | 0 FLOPs      | 0          | 1
+   ├── avgpool    | 109.400ns      | 225.500ns | 36.00 Kb     | 108.00 Kb | 0 FLOPs      | 0          | 1
+   └── classifier |                |           |              |           |              |            |
+      ├── 0       | 6.000ns        | 6.000ns   | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+      ├── 1       | 6.799us        | 13.618us  | 16.00 Kb     | 32.00 Kb  | 75.50MFLOPs  | 37.75M     | 1
+      ├── 2       | 37.800ns       | 59.400ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+      ├── 3       | 6.999ns        | 6.999ns   | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+      ├── 4       | 3.891us        | 7.812us   | 16.00 Kb     | 32.00 Kb  | 33.55MFLOPs  | 16.78M     | 1
+      ├── 5       | 34.600ns       | 51.300ns  | 0 b          | 0 b       | 0 FLOPs      | 0          | 1
+      └── 6       | 1.039us        | 2.098us   | 3.91 Kb      | 7.81 Kb   | 8.19MFLOPs   | 4.10M      | 1
+
+
+Trace file exported to: original_alexnet_cpu_trace.json
+```
+
 ## 📌 许可证
 
 本项目仅用于课程学习与学术交流，代码基于 MIT 协议开放。请勿用于商业用途。
