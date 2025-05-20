@@ -132,7 +132,11 @@ if __name__ == "__main__":
         action="store_true",  # 是否 64x64 上采样至 224x224
         help="Use simple upper limit for the model input."
     )
-
+    parser.add_argument(
+        "--save_output",
+        action="store_true", #是否保存prof.display
+        help="Save output file about prof.dispaly"
+    )
     args = parser.parse_args()
 
     # 默认 cuda 可用就启用 cuda 的 profiler
@@ -209,7 +213,21 @@ if __name__ == "__main__":
     
     print(f"\n    --- Results for {experiment_label} (tiny-imagenet-200) ---")
 
+    save_file=f"{model_name_to_run}_{device.type}_batch{current_batch_size}_{224 if args.upper_simple else 64}"
     print(prof.display(top_k=-1))
+    if args.save_output:
+        import io
+        from contextlib import redirect_stdout
+
+        f = io.StringIO()
+        with redirect_stdout(f):
+            print(prof.display(top_k=-1))
+        output = f.getvalue()
+# 保存到文件
+        with open(f"{save_file}.txt", "w",encoding="utf-8") as file:
+            file.write(output)
+        raw_draw(prof.raw(),save_file)
+
 
     if args.sorted:
         print(f"\n--- {model_name_to_run} Profiler Results (Sorted by CPU total time) ---")
@@ -225,10 +243,6 @@ if __name__ == "__main__":
         if device.type == 'cuda':
             print(f"\n--- {model_name_to_run} Profiler Results (Sorted by CUDA Memory Usage) ---")
             print(prof.display(sort_by="CUDA Mem", top_k=args.row_limit))
-
-    # 调用处理 profile 的 raw 数据
-    raw_draw(prof.raw())
-
 
     if args.trace_export:
         trace_file = f"{model_name_to_run}_{device.type}_trace.json"
