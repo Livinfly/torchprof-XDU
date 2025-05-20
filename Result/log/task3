@@ -1,0 +1,348 @@
+(torch310) PS D:\github\torchprof-XDU> python '.\profile_tasks\task2&3.py' --model ori --sorted --row_limit 10 --trace_export
+Using device: cuda
+Batch size: 1, Channels: 3, Height: 224, Width: 224
+
+Running Experiment: Original AlexNet Profiling (Task 2)
+
+--- Profiling Original AlexNet on cuda ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- Original AlexNet Profiler Results ---
+Module            | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+------------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+AlexNet           |               |          |                |           |         |            |              |            |
+   ├── features   |               |          |                |           |         |            |              |            |
+   │  ├── 0       | 1.435ms       | 6.937ms  | 162.016us      | 532.960us | 0 b     | 2.96 Mb    | 140.55MFLOPs | 23.30K     | 1
+   │  ├── 1       | 1.170ms       | 3.460ms  | 9.219us        | 18.438us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 2       | 1.321ms       | 3.908ms  | 17.664us       | 35.328us  | 0 b     | 729.50 Kb  | 0 FLOPs      | 0          | 1
+   │  ├── 3       | 1.526ms       | 7.214ms  | 197.152us      | 647.072us | 0 b     | 2.14 Mb    | 447.90MFLOPs | 307.39K    | 1
+   │  ├── 4       | 1.429ms       | 4.236ms  | 7.200us        | 14.400us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 5       | 1.683ms       | 4.957ms  | 13.536us       | 27.072us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+   │  ├── 6       | 1.376ms       | 6.534ms  | 215.802us      | 704.876us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 7       | 1.339ms       | 3.970ms  | 6.048us        | 12.096us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 1.540ms       | 7.228ms  | 399.665us      | 1.316ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 1.298ms       | 3.835ms  | 5.664us        | 11.328us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 10      | 1.565ms       | 7.361ms  | 338.656us      | 1.115ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 11      | 1.224ms       | 3.621ms  | 5.568us        | 11.136us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  └── 12      | 1.517ms       | 4.496ms  | 12.672us       | 25.344us  | 0 b     | 144.00 Kb  | 0 FLOPs      | 0          | 1
+   ├── avgpool    | 1.312ms       | 3.885ms  | 15.072us       | 30.144us  | 0 b     | 108.00 Kb  | 0 FLOPs      | 0          | 1
+   └── classifier |               |          |                |           |         |            |              |            |
+      ├── 0       | 1.219ms       | 1.219ms  | 0.000ns        | 0.000ns   | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 1       | 1.629ms       | 4.037ms  | 1.150ms        | 2.300ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+      ├── 2       | 1.358ms       | 4.018ms  | 5.469us        | 10.938us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 3       | 1.122ms       | 1.122ms  | 0.000ns        | 0.000ns   | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 4       | 1.665ms       | 4.601ms  | 521.367us      | 1.043ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+      ├── 5       | 1.159ms       | 3.432ms  | 5.472us        | 10.944us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      └── 6       | 1.295ms       | 3.756ms  | 142.749us      | 285.498us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CPU total time) ---
+Module       | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+-------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+      ├── 10 | 1.565ms       | 7.361ms  | 338.656us      | 1.115ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+      ├── 8  | 1.540ms       | 7.228ms  | 399.665us      | 1.316ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+      ├── 3  | 1.526ms       | 7.214ms  | 197.152us      | 647.072us | 0 b     | 2.14 Mb    | 447.90MFLOPs | 307.39K    | 1
+      ├── 0  | 1.435ms       | 6.937ms  | 162.016us      | 532.960us | 0 b     | 2.96 Mb    | 140.55MFLOPs | 23.30K     | 1
+      ├── 6  | 1.376ms       | 6.534ms  | 215.802us      | 704.876us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+      ├── 5  | 1.683ms       | 4.957ms  | 13.536us       | 27.072us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 4  | 1.665ms       | 4.601ms  | 521.367us      | 1.043ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+      ├── 12 | 1.517ms       | 4.496ms  | 12.672us       | 25.344us  | 0 b     | 144.00 Kb  | 0 FLOPs      | 0          | 1
+      ├── 4  | 1.429ms       | 4.236ms  | 7.200us        | 14.400us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      └── 1  | 1.629ms       | 4.037ms  | 1.150ms        | 2.300ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CUDA total time) ---
+Module         | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+---------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+   │  ├── 1    | 1.629ms       | 4.037ms  | 1.150ms        | 2.300ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+   │  ├── 8    | 1.540ms       | 7.228ms  | 399.665us      | 1.316ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 10   | 1.565ms       | 7.361ms  | 338.656us      | 1.115ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 4    | 1.665ms       | 4.601ms  | 521.367us      | 1.043ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+   │  ├── 6    | 1.376ms       | 6.534ms  | 215.802us      | 704.876us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 3    | 1.526ms       | 7.214ms  | 197.152us      | 647.072us | 0 b     | 2.14 Mb    | 447.90MFLOPs | 307.39K    | 1
+   │  ├── 0    | 1.435ms       | 6.937ms  | 162.016us      | 532.960us | 0 b     | 2.96 Mb    | 140.55MFLOPs | 23.30K     | 1
+   │  ├── 6    | 1.295ms       | 3.756ms  | 142.749us      | 285.498us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+      └── 2    | 1.321ms       | 3.908ms  | 17.664us       | 35.328us  | 0 b     | 729.50 Kb  | 0 FLOPs      | 0          | 1
+   └── avgpool | 1.312ms       | 3.885ms  | 15.072us       | 30.144us  | 0 b     | 108.00 Kb  | 0 FLOPs      | 0          | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CPU Memory Usage) ---
+Module      | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+      ├── 0 | 1.435ms       | 6.937ms  | 162.016us      | 532.960us | 0 b     | 2.96 Mb    | 140.55MFLOPs | 23.30K     | 1
+      ├── 1 | 1.170ms       | 3.460ms  | 9.219us        | 18.438us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 2 | 1.321ms       | 3.908ms  | 17.664us       | 35.328us  | 0 b     | 729.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 3 | 1.526ms       | 7.214ms  | 197.152us      | 647.072us | 0 b     | 2.14 Mb    | 447.90MFLOPs | 307.39K    | 1
+      ├── 4 | 1.429ms       | 4.236ms  | 7.200us        | 14.400us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 5 | 1.683ms       | 4.957ms  | 13.536us       | 27.072us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 6 | 1.376ms       | 6.534ms  | 215.802us      | 704.876us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+      ├── 7 | 1.339ms       | 3.970ms  | 6.048us        | 12.096us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 8 | 1.540ms       | 7.228ms  | 399.665us      | 1.316ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+      └── 9 | 1.298ms       | 3.835ms  | 5.664us        | 11.328us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CUDA Memory Usage) ---
+Module       | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+-------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+      ├── 0  | 1.435ms       | 6.937ms  | 162.016us      | 532.960us | 0 b     | 2.96 Mb    | 140.55MFLOPs | 23.30K     | 1
+      ├── 3  | 1.526ms       | 7.214ms  | 197.152us      | 647.072us | 0 b     | 2.14 Mb    | 447.90MFLOPs | 307.39K    | 1
+      ├── 1  | 1.629ms       | 4.037ms  | 1.150ms        | 2.300ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+      ├── 4  | 1.665ms       | 4.601ms  | 521.367us      | 1.043ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+      ├── 6  | 1.295ms       | 3.756ms  | 142.749us      | 285.498us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+      ├── 6  | 1.376ms       | 6.534ms  | 215.802us      | 704.876us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+      ├── 2  | 1.321ms       | 3.908ms  | 17.664us       | 35.328us  | 0 b     | 729.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 8  | 1.540ms       | 7.228ms  | 399.665us      | 1.316ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+      ├── 10 | 1.565ms       | 7.361ms  | 338.656us      | 1.115ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+      └── 5  | 1.683ms       | 4.957ms  | 13.536us       | 27.072us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+
+
+Trace file exported to: original_alexnet_cuda_trace.json
+
+
+(torch310) PS D:\github\torchprof-XDU> python '.\profile_tasks\task2&3.py' --model opt --sorted --row_limit 10 --trace_export
+Using device: cuda
+Batch size: 1, Channels: 3, Height: 224, Width: 224
+
+Running Experiment: Optimized AlexNet Profiling (Task 3 - Optimization Part)
+Creating 'optimized' AlexNet by modifying its structure...
+
+--- Profiling Optimized AlexNet on cuda ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- Optimized AlexNet Profiler Results ---
+Module            | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+------------------|---------------|-----------|----------------|-----------|---------|------------|--------------|------------|------
+AlexNet           |               |           |                |           |         |            |              |            |
+   ├── features   |               |           |                |           |         |            |              |            |
+   │  ├── 0       | 1.298ms       | 6.228ms   | 114.147us      | 375.370us | 0 b     | 1.48 Mb    | 70.28MFLOPs  | 11.65K     | 1
+   │  ├── 1       | 1.271ms       | 3.757ms   | 7.296us        | 14.592us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 2       | 1.212ms       | 3.565ms   | 12.771us       | 25.542us  | 0 b     | 365.50 Kb  | 0 FLOPs      | 0          | 1
+   │  ├── 3       | 1.495ms       | 7.032ms   | 110.237us      | 358.758us | 0 b     | 2.14 Mb    | 223.95MFLOPs | 153.79K    | 1
+   │  ├── 4       | 1.326ms       | 3.933ms   | 7.389us        | 14.778us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 5       | 1.361ms       | 4.032ms   | 14.208us       | 28.416us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+   │  ├── 6       | 1.340ms       | 6.379ms   | 215.585us      | 704.421us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 7       | 1.233ms       | 3.655ms   | 6.240us        | 12.480us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 1.587ms       | 7.451ms   | 411.634us      | 1.355ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 1.206ms       | 3.577ms   | 5.760us        | 11.520us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  ├── 10      | 1.397ms       | 6.578ms   | 335.276us      | 1.104ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 11      | 1.213ms       | 3.596ms   | 5.856us        | 11.712us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+   │  └── 12      | 1.352ms       | 4.006ms   | 12.576us       | 25.152us  | 0 b     | 144.00 Kb  | 0 FLOPs      | 0          | 1
+   ├── avgpool    | 1.473ms       | 4.372ms   | 15.840us       | 31.680us  | 0 b     | 108.00 Kb  | 0 FLOPs      | 0          | 1
+   └── classifier |               |           |                |           |         |            |              |            |
+      ├── 0       | 1.028ms       | 1.028ms   | 0.000ns        | 0.000ns   | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 1       | 1.534ms       | 3.744ms   | 1.154ms        | 2.309ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+      ├── 2       | 1.158ms       | 3.429ms   | 5.376us        | 10.752us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 3       | 972.000us     | 972.000us | 0.000ns        | 0.000ns   | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 4       | 1.367ms       | 3.725ms   | 520.320us      | 1.041ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+      ├── 5       | 1.234ms       | 3.660ms   | 5.376us        | 10.752us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      └── 6       | 1.170ms       | 3.389ms   | 147.270us      | 294.540us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CPU total time) ---
+Module         | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+---------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+   │  ├── 8    | 1.587ms       | 7.451ms  | 411.634us      | 1.355ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 3    | 1.495ms       | 7.032ms  | 110.237us      | 358.758us | 0 b     | 2.14 Mb    | 223.95MFLOPs | 153.79K    | 1
+   │  ├── 10   | 1.397ms       | 6.578ms  | 335.276us      | 1.104ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 6    | 1.340ms       | 6.379ms  | 215.585us      | 704.421us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+   │  └── 0    | 1.298ms       | 6.228ms  | 114.147us      | 375.370us | 0 b     | 1.48 Mb    | 70.28MFLOPs  | 11.65K     | 1
+   └── avgpool | 1.473ms       | 4.372ms  | 15.840us       | 31.680us  | 0 b     | 108.00 Kb  | 0 FLOPs      | 0          | 1
+      ├── 5    | 1.361ms       | 4.032ms  | 14.208us       | 28.416us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 12   | 1.352ms       | 4.006ms  | 12.576us       | 25.152us  | 0 b     | 144.00 Kb  | 0 FLOPs      | 0          | 1
+      ├── 4    | 1.326ms       | 3.933ms  | 7.389us        | 14.778us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      └── 1    | 1.271ms       | 3.757ms  | 7.296us        | 14.592us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CUDA total time) ---
+Module         | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+---------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+   │  ├── 1    | 1.534ms       | 3.744ms  | 1.154ms        | 2.309ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+   │  ├── 8    | 1.587ms       | 7.451ms  | 411.634us      | 1.355ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 10   | 1.397ms       | 6.578ms  | 335.276us      | 1.104ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 4    | 1.367ms       | 3.725ms  | 520.320us      | 1.041ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+   │  ├── 6    | 1.340ms       | 6.379ms  | 215.585us      | 704.421us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 0    | 1.298ms       | 6.228ms  | 114.147us      | 375.370us | 0 b     | 1.48 Mb    | 70.28MFLOPs  | 11.65K     | 1
+   │  ├── 3    | 1.495ms       | 7.032ms  | 110.237us      | 358.758us | 0 b     | 2.14 Mb    | 223.95MFLOPs | 153.79K    | 1
+   │  └── 6    | 1.170ms       | 3.389ms  | 147.270us      | 294.540us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+   └── avgpool | 1.473ms       | 4.372ms  | 15.840us       | 31.680us  | 0 b     | 108.00 Kb  | 0 FLOPs      | 0          | 1
+      └── 5    | 1.361ms       | 4.032ms  | 14.208us       | 28.416us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CPU Memory Usage) ---
+Module      | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+      ├── 0 | 1.298ms       | 6.228ms  | 114.147us      | 375.370us | 0 b     | 1.48 Mb    | 70.28MFLOPs  | 11.65K     | 1
+      ├── 1 | 1.271ms       | 3.757ms  | 7.296us        | 14.592us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 2 | 1.212ms       | 3.565ms  | 12.771us       | 25.542us  | 0 b     | 365.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 3 | 1.495ms       | 7.032ms  | 110.237us      | 358.758us | 0 b     | 2.14 Mb    | 223.95MFLOPs | 153.79K    | 1
+      ├── 4 | 1.326ms       | 3.933ms  | 7.389us        | 14.778us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 5 | 1.361ms       | 4.032ms  | 14.208us       | 28.416us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+      ├── 6 | 1.340ms       | 6.379ms  | 215.585us      | 704.421us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+      ├── 7 | 1.233ms       | 3.655ms  | 6.240us        | 12.480us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+      ├── 8 | 1.587ms       | 7.451ms  | 411.634us      | 1.355ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+      └── 9 | 1.206ms       | 3.577ms  | 5.760us        | 11.520us  | 0 b     | 0 b        | 0 FLOPs      | 0          | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CUDA Memory Usage) ---
+Module       | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem   | FLOPs        | Parameters | Calls
+-------------|---------------|----------|----------------|-----------|---------|------------|--------------|------------|------
+      ├── 3  | 1.495ms       | 7.032ms  | 110.237us      | 358.758us | 0 b     | 2.14 Mb    | 223.95MFLOPs | 153.79K    | 1
+      ├── 0  | 1.298ms       | 6.228ms  | 114.147us      | 375.370us | 0 b     | 1.48 Mb    | 70.28MFLOPs  | 11.65K     | 1
+      ├── 1  | 1.534ms       | 3.744ms  | 1.154ms        | 2.309ms   | 0 b     | 1.03 Mb    | 75.50MFLOPs  | 37.75M     | 1
+      ├── 4  | 1.367ms       | 3.725ms  | 520.320us      | 1.041ms   | 0 b     | 1.03 Mb    | 33.55MFLOPs  | 16.78M     | 1
+      ├── 6  | 1.170ms       | 3.389ms  | 147.270us      | 294.540us | 0 b     | 1.01 Mb    | 8.19MFLOPs   | 4.10M      | 1
+      ├── 6  | 1.340ms       | 6.379ms  | 215.585us      | 704.421us | 0 b     | 1014.00 Kb | 224.28MFLOPs | 663.94K    | 1
+      ├── 8  | 1.587ms       | 7.451ms  | 411.634us      | 1.355ms   | 0 b     | 676.00 Kb  | 299.04MFLOPs | 884.99K    | 1
+      ├── 10 | 1.397ms       | 6.578ms  | 335.276us      | 1.104ms   | 0 b     | 676.00 Kb  | 199.36MFLOPs | 590.08K    | 1
+      ├── 5  | 1.361ms       | 4.032ms  | 14.208us       | 28.416us  | 0 b     | 507.50 Kb  | 0 FLOPs      | 0          | 1
+      └── 2  | 1.212ms       | 3.565ms  | 12.771us       | 25.542us  | 0 b     | 365.50 Kb  | 0 FLOPs      | 0          | 1
+
+
+Trace file exported to: optimized_alexnet_cuda_trace.json
+
+
+(torch310) PS D:\github\torchprof-XDU> python '.\profile_tasks\task2&3.py' --model ori --sorted --row_limit 10 --trace_export --use_cpu
+Using device: cpu
+Batch size: 1, Channels: 3, Height: 224, Width: 224
+
+Running Experiment: Original AlexNet Profiling (Task 2)
+
+--- Profiling Original AlexNet on cpu ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- Original AlexNet Profiler Results ---
+Module            | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+------------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+AlexNet           |               |           |                |           |           |          |              |            |
+   ├── features   |               |           |                |           |           |          |              |            |
+   │  ├── 0       | 605.300us     | 2.380ms   | 0.000ns        | 0.000ns   | 3.69 Mb   | 0 b      | 140.55MFLOPs | 23.30K     | 1
+   │  ├── 1       | 106.700us     | 199.500us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 2       | 305.700us     | 603.700us | 0.000ns        | 0.000ns   | 729.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 3       | 1.030ms       | 4.094ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 447.90MFLOPs | 307.39K    | 1
+   │  ├── 4       | 70.200us      | 132.800us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 5       | 371.300us     | 736.600us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 6       | 785.000us     | 3.116ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 7       | 82.500us      | 159.300us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 979.700us     | 3.897ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 83.700us      | 154.500us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 10      | 967.800us     | 3.843ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 11      | 77.900us      | 148.800us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  └── 12      | 396.900us     | 782.900us | 0.000ns        | 0.000ns   | 144.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   ├── avgpool    | 111.200us     | 219.100us | 0.000ns        | 0.000ns   | 108.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   └── classifier |               |           |                |           |           |          |              |            |
+      ├── 0       | 1.200us       | 1.200us   | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 1       | 2.465ms       | 4.931ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+      ├── 2       | 15.500us      | 24.400us  | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 3       | 1.200us       | 1.200us   | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 4       | 1.075ms       | 2.158ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 33.55MFLOPs  | 16.78M     | 1
+      ├── 5       | 17.100us      | 26.600us  | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      └── 6       | 488.300us     | 987.400us | 0.000ns        | 0.000ns   | 7.81 Kb   | 0 b      | 8.19MFLOPs   | 4.10M      | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CPU total time) ---
+Module       | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+-------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+      ├── 1  | 2.465ms       | 4.931ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+      ├── 3  | 1.030ms       | 4.094ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 447.90MFLOPs | 307.39K    | 1
+      ├── 8  | 979.700us     | 3.897ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+      ├── 10 | 967.800us     | 3.843ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+      ├── 6  | 785.000us     | 3.116ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+      ├── 0  | 605.300us     | 2.380ms   | 0.000ns        | 0.000ns   | 3.69 Mb   | 0 b      | 140.55MFLOPs | 23.30K     | 1
+      ├── 4  | 1.075ms       | 2.158ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 33.55MFLOPs  | 16.78M     | 1
+      ├── 6  | 488.300us     | 987.400us | 0.000ns        | 0.000ns   | 7.81 Kb   | 0 b      | 8.19MFLOPs   | 4.10M      | 1
+      ├── 12 | 396.900us     | 782.900us | 0.000ns        | 0.000ns   | 144.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+      └── 5  | 371.300us     | 736.600us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+
+
+--- Original AlexNet Profiler Results (Sorted by CPU Memory Usage) ---
+Module         | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+---------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+   │  ├── 0    | 605.300us     | 2.380ms   | 0.000ns        | 0.000ns   | 3.69 Mb   | 0 b      | 140.55MFLOPs | 23.30K     | 1
+   │  ├── 3    | 1.030ms       | 4.094ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 447.90MFLOPs | 307.39K    | 1
+   │  ├── 6    | 785.000us     | 3.116ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 8    | 979.700us     | 3.897ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 10   | 967.800us     | 3.843ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 2    | 305.700us     | 603.700us | 0.000ns        | 0.000ns   | 729.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 5    | 371.300us     | 736.600us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  └── 12   | 396.900us     | 782.900us | 0.000ns        | 0.000ns   | 144.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   └── avgpool | 111.200us     | 219.100us | 0.000ns        | 0.000ns   | 108.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+      └── 1    | 2.465ms       | 4.931ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+
+
+Trace file exported to: original_alexnet_cpu_trace.json
+
+
+(torch310) PS D:\github\torchprof-XDU> python '.\profile_tasks\task2&3.py' --model opt --sorted --row_limit 10 --trace_export --use_cpu
+Using device: cpu
+Batch size: 1, Channels: 3, Height: 224, Width: 224
+
+Running Experiment: Optimized AlexNet Profiling (Task 3 - Optimization Part)
+Creating 'optimized' AlexNet by modifying its structure...
+
+--- Profiling Optimized AlexNet on cpu ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- Optimized AlexNet Profiler Results ---
+Module            | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+------------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+AlexNet           |               |           |                |           |           |          |              |            |
+   ├── features   |               |           |                |           |           |          |              |            |
+   │  ├── 0       | 659.700us     | 2.594ms   | 0.000ns        | 0.000ns   | 1.85 Mb   | 0 b      | 70.28MFLOPs  | 11.65K     | 1
+   │  ├── 1       | 123.400us     | 233.800us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 2       | 396.400us     | 784.500us | 0.000ns        | 0.000ns   | 364.50 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 3       | 663.500us     | 2.620ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 223.95MFLOPs | 153.79K    | 1
+   │  ├── 4       | 115.600us     | 218.400us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 5       | 245.400us     | 479.200us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 6       | 648.400us     | 2.569ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 7       | 137.500us     | 258.800us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 8       | 682.600us     | 2.706ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 9       | 98.400us      | 183.000us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 10      | 646.400us     | 2.559ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 11      | 87.200us      | 163.300us | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+   │  └── 12      | 178.000us     | 345.400us | 0.000ns        | 0.000ns   | 144.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   ├── avgpool    | 121.900us     | 194.600us | 0.000ns        | 0.000ns   | 108.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   └── classifier |               |           |                |           |           |          |              |            |
+      ├── 0       | 1.200us       | 1.200us   | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 1       | 3.418ms       | 6.838ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+      ├── 2       | 15.900us      | 23.800us  | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 3       | 1.300us       | 1.300us   | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      ├── 4       | 1.566ms       | 3.146ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 33.55MFLOPs  | 16.78M     | 1
+      ├── 5       | 19.800us      | 27.300us  | 0.000ns        | 0.000ns   | 0 b       | 0 b      | 0 FLOPs      | 0          | 1
+      └── 6       | 510.700us     | 1.025ms   | 0.000ns        | 0.000ns   | 7.81 Kb   | 0 b      | 8.19MFLOPs   | 4.10M      | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CPU total time) ---
+Module       | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+-------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+      ├── 1  | 3.418ms       | 6.838ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+      ├── 4  | 1.566ms       | 3.146ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 33.55MFLOPs  | 16.78M     | 1
+      ├── 8  | 682.600us     | 2.706ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+      ├── 3  | 663.500us     | 2.620ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 223.95MFLOPs | 153.79K    | 1
+      ├── 0  | 659.700us     | 2.594ms   | 0.000ns        | 0.000ns   | 1.85 Mb   | 0 b      | 70.28MFLOPs  | 11.65K     | 1
+      ├── 6  | 648.400us     | 2.569ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+      ├── 10 | 646.400us     | 2.559ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+      ├── 6  | 510.700us     | 1.025ms   | 0.000ns        | 0.000ns   | 7.81 Kb   | 0 b      | 8.19MFLOPs   | 4.10M      | 1
+      ├── 2  | 396.400us     | 784.500us | 0.000ns        | 0.000ns   | 364.50 Kb | 0 b      | 0 FLOPs      | 0          | 1
+      └── 5  | 245.400us     | 479.200us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+
+
+--- Optimized AlexNet Profiler Results (Sorted by CPU Memory Usage) ---
+Module         | Self CPU time | CPU time  | Self CUDA time | CUDA time | CPU Mem   | CUDA Mem | FLOPs        | Parameters | Calls
+---------------|---------------|-----------|----------------|-----------|-----------|----------|--------------|------------|------
+   │  ├── 3    | 663.500us     | 2.620ms   | 0.000ns        | 0.000ns   | 2.67 Mb   | 0 b      | 223.95MFLOPs | 153.79K    | 1
+   │  ├── 0    | 659.700us     | 2.594ms   | 0.000ns        | 0.000ns   | 1.85 Mb   | 0 b      | 70.28MFLOPs  | 11.65K     | 1
+   │  ├── 6    | 648.400us     | 2.569ms   | 0.000ns        | 0.000ns   | 1.24 Mb   | 0 b      | 224.28MFLOPs | 663.94K    | 1
+   │  ├── 8    | 682.600us     | 2.706ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 299.04MFLOPs | 884.99K    | 1
+   │  ├── 10   | 646.400us     | 2.559ms   | 0.000ns        | 0.000ns   | 845.00 Kb | 0 b      | 199.36MFLOPs | 590.08K    | 1
+   │  ├── 5    | 245.400us     | 479.200us | 0.000ns        | 0.000ns   | 507.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  ├── 2    | 396.400us     | 784.500us | 0.000ns        | 0.000ns   | 364.50 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   │  └── 12   | 178.000us     | 345.400us | 0.000ns        | 0.000ns   | 144.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+   └── avgpool | 121.900us     | 194.600us | 0.000ns        | 0.000ns   | 108.00 Kb | 0 b      | 0 FLOPs      | 0          | 1
+      └── 1    | 3.418ms       | 6.838ms   | 0.000ns        | 0.000ns   | 32.00 Kb  | 0 b      | 75.50MFLOPs  | 37.75M     | 1
+
+
+Trace file exported to: optimized_alexnet_cpu_trace.json

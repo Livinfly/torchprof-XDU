@@ -1,0 +1,28 @@
+(torch310) PS D:\github\torchprof-XDU> python .\profile_tasks\task4.py --model mim --trace_export
+Using device: cuda
+
+Running Experiment: Multi-Input Model Profiling
+Input A shape: torch.Size([1, 128]), Input B shape: torch.Size([1, 64])
+
+--- Profiling MultiInputNet on cuda ---
+Warm-up runs (2 iterations)...
+Starting profiled run...
+
+--- MultiInputNet Profiler Results ---
+Module                   | Self CPU time | CPU time | Self CUDA time | CUDA time | CPU Mem | CUDA Mem | FLOPs       | Parameters | Calls
+-------------------------|---------------|----------|----------------|-----------|---------|----------|-------------|------------|------
+MultiInputNet            |               |          |                |           |         |          |             |            |      
+   ├── image_branch      |               |          |                |           |         |          |             |            |      
+   │  ├── fc1            | 1.048ms       | 3.008ms  | 10.560us       | 21.120us  | 0 b     | 1.00 Mb  | 65.54KFLOPs | 33.02K     | 1    
+   │  ├── activation     | 897.800us     | 2.617ms  | 5.763us        | 11.526us  | 0 b     | 2.00 Kb  | 0 FLOPs     | 0          | 1    
+   │  └── fc2            | 968.600us     | 2.827ms  | 12.000us       | 24.000us  | 0 b     | 1.00 Mb  | 16.38KFLOPs | 8.22K      | 1    
+   ├── text_branch       |               |          |                |           |         |          |             |            |      
+   │  ├── fc1            | 1.201ms       | 3.535ms  | 9.312us        | 18.624us  | 0 b     | 1.00 Mb  | 16.38KFLOPs | 8.32K      | 1    
+   │  ├── activation     | 1.122ms       | 3.315ms  | 5.280us        | 10.560us  | 0 b     | 1.00 Kb  | 0 FLOPs     | 0          | 1
+      └── fc2            | 1.176ms       | 3.424ms  | 8.832us        | 17.664us  | 0 b     | 1.00 Mb  | 4.10KFLOPs  | 2.06K      | 1
+   ├── merger_fc1        | 1.127ms       | 3.306ms  | 9.312us        | 18.624us  | 0 b     | 1.00 Mb  | 6.14KFLOPs  | 3.14K      | 1
+   ├── merger_activation | 1.087ms       | 3.207ms  | 5.280us        | 10.560us  | 0 b     | 1.00 Kb  | 0 FLOPs     | 0          | 1
+   └── classifier        | 1.097ms       | 3.215ms  | 8.061us        | 16.122us  | 0 b     | 1.00 Mb  | 1.28KFLOPs  | 650.00     | 1
+
+
+Trace file exported to: mim_model_cuda_trace.json
